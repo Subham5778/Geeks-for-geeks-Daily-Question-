@@ -1,0 +1,21 @@
+class Solution {
+    public ArrayList<Integer> intersectionWithDuplicates(int[] a, int[] b) {
+        // Use a map to store the frequency of elements in array a
+        Map<Integer, Integer> mapA = new HashMap<>();
+        for (int num : a) {
+            mapA.put(num, mapA.getOrDefault(num, 0) + 1);
+        }
+
+        // Use a set to store the intersection elements
+        Set<Integer> resultSet = new HashSet<>();
+        for (int num : b) {
+            if (mapA.containsKey(num) && mapA.get(num) > 0) {
+                resultSet.add(num);
+                mapA.put(num, mapA.get(num) - 1); // Decrease the count in mapA
+            }
+        }
+
+        // Convert the set to an ArrayList
+        return new ArrayList<>(resultSet);
+    }
+}
