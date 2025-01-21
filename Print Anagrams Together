@@ -1,0 +1,17 @@
+import java.util.*;
+ class Solution {
+    public ArrayList<ArrayList<String>> anagrams(String[] arr) {
+        
+        Map<String, ArrayList<String>> mp = new HashMap<>();
+        for (String s : arr) {
+            char[] tempArray = s.toCharArray();
+            Arrays.sort(tempArray);
+            String temp = new String(tempArray);
+            if (!mp.containsKey(temp)) {
+                mp.put(temp, new ArrayList<>());
+            }
+            mp.get(temp).add(s);
+        }
+        return new ArrayList<>(mp.values());
+    }
+}
