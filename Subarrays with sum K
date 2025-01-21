@@ -1,0 +1,26 @@
+class Solution {
+    public int countSubarrays(int arr[], int k) {
+        // code here
+        
+        // HashMap to store the cumulative sum and its frequency
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1); // Initialize with sum 0 having one occurrence
+        
+        int count = 0;
+        int sum = 0;
+        
+        for (int num : arr) {
+            sum += num;
+            
+            // Check if there is a subarray with sum equal to (sum - k)
+            if (map.containsKey(sum - k)) {
+                count += map.get(sum - k);
+            }
+            
+            // Update the frequency of the cumulative sum
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        
+        return count;
+    }
+}
